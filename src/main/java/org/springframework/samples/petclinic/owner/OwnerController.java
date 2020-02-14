@@ -68,8 +68,21 @@ class OwnerController {
 			return VIEWS_OWNER_CREATE_OR_UPDATE_FORM;
 		}
 		else {
+			// let's check if an owner with the same name does not exist..
+			verifyNameUnique(owner.getFirstName(), owner.getLastName());
 			this.owners.save(owner);
 			return "redirect:/owners/" + owner.getId();
+		}
+	}
+
+	private void verifyNameUnique(String firstName, String lastName) {
+		for (int id : this.owners.getAllIds()) {
+			Owner other = owners.findById(id);
+			boolean sameFirstName = other.getFirstName().equals(firstName);
+			boolean sameLastName = other.getLastName().equals(lastName);
+			if (sameFirstName && sameLastName) {
+				throw new IllegalArgumentException("A Owner with the same name already exists!");
+			}
 		}
 	}
 

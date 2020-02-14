@@ -33,6 +33,14 @@
   </properties>
 
   <dependencies>
+  <!-- Used to place more data in teh DB -->
+  <dependency>
+      <groupId>com.devskiller</groupId>
+      <artifactId>jfairy</artifactId>
+      <version>0.6.3</version>
+  </dependency>
+
+
     <!-- Spring and Spring Boot dependencies -->
     <dependency>
       <groupId>org.springframework.boot</groupId>

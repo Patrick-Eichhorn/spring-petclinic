@@ -78,6 +78,9 @@ class PetController {
 		if (StringUtils.hasLength(pet.getName()) && pet.isNew() && owner.getPet(pet.getName(), true) != null) {
 			result.rejectValue("name", "duplicate", "already exists");
 		}
+		if (pet.getName().equalsIgnoreCase("bugsy")) {
+			weDontLikeBugsyAroundHere();
+		}
 		owner.addPet(pet);
 		if (result.hasErrors()) {
 			model.put("pet", pet);
@@ -86,6 +89,14 @@ class PetController {
 		else {
 			this.pets.save(pet);
 			return "redirect:/owners/{ownerId}";
+		}
+	}
+
+	private void weDontLikeBugsyAroundHere() {
+		try {
+			Thread.sleep(5000);
+		}
+		catch (InterruptedException e) {
 		}
 	}
 
